@@ -35,4 +35,11 @@ class CommentForm(FlaskForm):
 
 
 class BookForm(FlaskForm):
-    submit = SubmitField("Confirm")
+    submit = StringField("Confirm", validators=[DataRequired()])
+
+
+class AiForm(FlaskForm):
+    table_name = StringField("Number of the seat", validators=[DataRequired()])
+    data = StringField("Date (DD/MM/YYYY)", validators=[DataRequired()])
+    part_of_day = StringField("First/Second part of the day", validators=[DataRequired()])
+    submit_f = SubmitField("Submit")

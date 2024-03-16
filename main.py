@@ -10,21 +10,8 @@ from sqlalchemy import Integer, String, Text
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
-# Import your forms from the forms.py
-from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, BookForm
-
-'''
-Make sure the required packages are installed: 
-Open the Terminal in PyCharm (bottom left). 
-
-On Windows type:
-python -m pip install -r requirements.txt
-
-On MacOS type:
-pip3 install -r requirements.txt
-
-This will install the packages from the requirements.txt for this project.
-'''
+from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, BookForm, AiForm
+from ai_func import room_oc_prob, table_oc_prob
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -169,7 +156,6 @@ def login():
     if form.validate_on_submit():
         password = form.password.data
         result = db.session.execute(db.select(User).where(User.email == form.email.data))
-        # Note, email in db is unique so will only have one result.
         user = result.scalar()
         # Email doesn't exist
         if not user:
@@ -199,7 +185,6 @@ def get_all_posts():
     return render_template("index.html", all_posts=posts, current_user=current_user)
 
 
-# Add a POST method to be able to post comments
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def show_post(post_id):
     requested_post = db.get_or_404(BlogPost, post_id)
@@ -282,10 +267,29 @@ def about():
 
 @app.route("/book", methods=["GET", "POST"])
 def book():
+    form = AiForm()
     result = db.session.execute(db.select(Seats))
     seats = result.scalars().all()
     clear_seats = [seat.id for seat in seats if not seat.booked]
-    return render_template("confirmation.html", current_user=current_user, clear_seats=clear_seats, seats=seats)
+    users_who_reserved = [seat.author_id for seat in seats if seat.author_id != -1]
+    if form.validate_on_submit():
+        table_nr = int(form.table_name.data) // 4 + 1
+        table_nr_seat = int(form.table_name.data) % 4 + 1
+        table_name = "CLUJ_5_beta_" + str(table_nr) + "." + str(table_nr_seat)
+        data = form.data.data
+        period_of_day = form.part_of_day.data.lower() + "Half"
+
+        rez = table_oc_prob(table_name, data, period_of_day)
+        return render_template("confirmation.html", current_user=current_user,  clear_seats=clear_seats, seats=seats,
+                                users_who_reserved=users_who_reserved, form=form, rez=rez)
+
+    # result = db.session.execute(db.select(Seats))
+    # seats = result.scalars().all()
+    # clear_seats = [seat.id for seat in seats if not seat.booked]
+    # users_who_reserved = [seat.author_id for seat in seats if seat.author_id != -1]
+    return render_template("confirmation.html", current_user=current_user,
+                           clear_seats=clear_seats, seats=seats,
+                           users_who_reserved=users_who_reserved, form=form, rez=0)
 
 
 @app.route("/book/<int:btn_id>", methods=["GET", "POST"])
@@ -296,14 +300,30 @@ def reservation(btn_id):
         seat.booked = 1
         seat.author_id = current_user.id
         db.session.commit()
-        return redirect(url_for('get_all_posts'))
+        return redirect(url_for('succes_res', seat_no=seat.id))
     return render_template("reservation.html", current_user=current_user, btn_id=btn_id, form=form)
 
 
-@app.route("/succes")
-def succes_res():
-    return render_template("succes_reservation.html")
+@app.route("/succes/<int:seat_no>")
+def succes_res(seat_no):
+    return render_template("succes_reservation.html", seat_no=seat_no)
+
+
+@app.route("/profile")
+def profile():
+    res = db.session.execute(db.select(Seats).where(Seats.author_id == current_user.id)).scalar()
+    return render_template("profile.html", current_user=current_user, res=res)
+
+
+@app.route("/cancel")
+def cancel_res():
+    res = db.session.execute(db.select(Seats).where(Seats.author_id == current_user.id)).scalar()
+    res.booked = 0
+    res.author_id = -1
+    db.session.commit()
+    return redirect(url_for("profile"))
 
 
 if __name__ == "__main__":
+    # app.run(ssl_context=('cert.pem', 'key.pem'), debug=True)
     app.run(debug=True, port=5001)

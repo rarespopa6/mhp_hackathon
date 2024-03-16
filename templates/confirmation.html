@@ -1,3 +1,4 @@
+{% from "bootstrap5/form.html" import render_form %}
 {% include "header.html" %}
 
 <!-- Page Header-->
@@ -20,66 +21,20 @@
   <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
-        <p>
+        {% if current_user.id not in users_who_reserved: %}
+        <p style="margin-left: 160px">
           Want to book a table or a room?
         </p>
         <p>
-          Check the availability and fill out the form below.
+          Check the availability and choose your favorite seat.
         </p>
+        {% else %}
+        <p style="margin-left: 160px">
+          You have already booked a seat. Can not book twice.
+        </p>
+        {% endif %}
 <!--        -->
       </div>
-<!--     <style>-->
-<!--      .button-container {-->
-<!--        display: flex;-->
-<!--        flex-wrap: wrap;-->
-<!--        justify-content: center;-->
-<!--      }-->
-<!--      .button-container > div {-->
-<!--        display: flex;-->
-<!--        flex-direction: column;-->
-<!--        align-items: center;-->
-<!--        margin: 0 10px;-->
-<!--      }-->
-<!--      .btn {-->
-<!--        margin: 5px;-->
-<!--      }-->
-<!--      -->
-<!--    </style>-->
-<!--      <div class="button-container">-->
-<!--        <div class="button-vertical">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=1) }}" style="border-radius: 50%; margin-bottom: 0px">1</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=2) }}" style="border-radius: 50%; margin-bottom: 0px">2</a>-->
-<!--        </div>-->
-<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=3) }}" style="border-radius: 50%; margin-bottom: 0px">3</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=4) }}" style="border-radius: 50%; margin-bottom: 0px">4</a>-->
-<!--        </div>-->
-<!--        <div class="button-vertical">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=5) }}" style="border-radius: 50%; margin-bottom: 0px">5</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=6) }}" style="border-radius: 50%; margin-bottom: 0px">6</a>-->
-<!--        </div>-->
-<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=7) }}" style="border-radius: 50%; margin-bottom: 0px">7</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=8) }}" style="border-radius: 50%; margin-bottom: 0px">8</a>-->
-<!--        </div>-->
-<!--        <div class="button-vertical">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=9) }}" style="border-radius: 50%; margin-bottom: 0px">9</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=10) }}" style="border-radius: 50%; margin-bottom: 0px">10</a>-->
-<!--        </div>-->
-<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=11) }}" style="border-radius: 50%; margin-bottom: 0px">11</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=12) }}" style="border-radius: 50%; margin-bottom: 0px">12</a>-->
-<!--        </div>-->
-<!--        <div class="button-vertical">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=13) }}" style="border-radius: 50%; margin-bottom: 0px">13</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=14) }}" style="border-radius: 50%; margin-bottom: 0px">14</a>-->
-<!--        </div>-->
-<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=15) }}" style="border-radius: 50%; margin-bottom: 0px">15</a>-->
-<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=16) }}" style="border-radius: 50%; margin-bottom: 0px">16</a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--        -->
       <style>
         .button {
           position:absolute;
@@ -114,6 +69,173 @@
         .button14 {background-color: #04AA6D;top:131px;left: 341px;}
         .button15 {background-color: #04AA6D;top:103px;left: 370px;}
         .button16 {background-color: #04AA6D;top:131px;left: 370px;}
+        .button17 {background-color: #04AA6D;top:108px;left: 422px;}
+        .button18 {background-color: #04AA6D;top:108px;left: 456px;}
+        .button19 {background-color: #04AA6D;top:108px;left: 493px;}
+        .button20 {background-color: #04AA6D;top:98px;left: 546px;}
+        .button21 {background-color: #04AA6D;top:126px;left: 546px;}
+        .button22 {background-color: #04AA6D;top:98px;left: 575px;}
+        .button23 {background-color: #04AA6D;top:126px;left: 575px;}
+        .button24 {background-color: #04AA6D;top:98px;left: 621px;}
+        .button25 {background-color: #04AA6D;top:125px;left: 621px;}
+        .button26 {background-color: #04AA6D;top:98px;left: 652px;}
+        .button27 {background-color: #04AA6D;top: 125px;;left: 652px;}
+        .button28 {background-color: #04AA6D;top:98px;left: 697px;}
+        .button29 {background-color: #04AA6D;top:125px;left: 697px;}
+        .button30 {background-color: #04AA6D;top:98px;left: 728px;}
+        .button31 {background-color: #04AA6D;top:125px;left: 728px;}
+        .button32 {background-color: #04AA6D;top:98px;left: 767px;}
+        .button33 {background-color: #04AA6D;top:125px;left: 767px;}
+        .button34 {background-color: #04AA6D;top:98px;left: 798px;}
+        .button35 {background-color: #04AA6D;top:125px;left: 798px;}
+        .button36 {background-color: #04AA6D;top:98px;left: 839px;}
+        .button37 {background-color: #04AA6D;top:125px;left: 839px;}
+        .button38 {background-color: #04AA6D;top:98px;left: 869px;}
+        .button39 {background-color: #04AA6D;top:125px;left: 869px;}
+        .button40 {background-color: #04AA6D;top:98px;left: 911px;}
+        .button41 {background-color: #04AA6D;top:125px;left: 911px;}
+        .button42 {background-color: #04AA6D;top:98px;left: 944px;}
+        .button43 {background-color: #04AA6D;top:125px;left: 944px;}
+        .button44 {background-color: #04AA6D;top:98px;left: 984px;}
+        .button45 {background-color: #04AA6D;top:125px;left: 984px;}
+        .button46 {background-color: #04AA6D;top:98px;left: 1012px;}
+        .button47 {background-color: #04AA6D;top:125px;left: 1012px;}
+        .button48 {background-color: #04AA6D;top:98px;left: 1051px;}
+        .button49 {background-color: #04AA6D;top:125px;left: 1051px;}
+        .button50 {background-color: #04AA6D;top:98px;left: 1082px;}
+        .button51 {background-color: #04AA6D;top:125px;left: 1082px;}
+        .button52 {background-color: #04AA6D;top:165px;left: 967px;}
+        .button53 {background-color: #04AA6D;top:194px;left: 967px;}
+        .button54 {background-color: #04AA6D;top:165px;left: 993px;}
+        .button55 {background-color: #04AA6D;top:194px;left: 993px;}
+        .button56 {background-color: #04AA6D;top:165px;left: 1027px;}
+        .button57 {background-color: #04AA6D;top:194px;left: 1027px;}
+        .button58 {background-color: #04AA6D;top:165px;left: 1057px;}
+        .button59 {background-color: #04AA6D;top:194px;left: 1057px;}
+
+        .button60 {background-color: #04AA6D;top:259px;left: 875px;}
+        .button61 {background-color: #04AA6D;top:285px;left: 875px;}
+
+        .button62 {background-color: #04AA6D;top:259px;left: 901px;}
+        .button63 {background-color: #04AA6D;top:285px;left: 901px;}
+
+        .button64 {background-color: #04AA6D;top:259px;left: 939px;}
+        .button65 {background-color: #04AA6D;top:285px;left: 939px;}
+
+        .button66 {background-color: #04AA6D;top:229px;left: 965px;}
+        .button67 {background-color: #04AA6D;top:259px;left: 965px;}
+        .button68 {background-color: #04AA6D;top:285px;left: 965px;}
+
+        .button69 {background-color: #04AA6D;top:229px;left: 1015px;}
+        .button70 {background-color: #04AA6D;top:259px;left: 1015px;}
+        .button71 {background-color: #04AA6D;top:285px;left: 1015px;}
+
+        .button72 {background-color: #04AA6D;top:229px;left: 1044px;}
+        .button73 {background-color: #04AA6D;top:259px;left: 1044px;}
+        .button74 {background-color: #04AA6D;top:285px;left: 1044px;}
+
+        .button75 {background-color: #04AA6D;top:360px;left: 1095px;}
+        .button76 {background-color: #04AA6D;top:367px;left: 902px;}
+
+        .button77 {background-color: #04AA6D;top:418px;left: 942px;}
+        .button78 {background-color: #04AA6D;top:448px;left: 942px;}
+
+        .button79 {background-color: #04AA6D;top:418px;left: 905px;}
+        .button80 {background-color: #04AA6D;top:448px;left: 905px;}
+
+        .button81 {background-color: #04AA6D;top:418px;left: 855px;}
+
+        .button82 {background-color: #04AA6D;top:448px;left: 855px;}
+        .button83 {background-color: #04AA6D;top:418px;left: 820px;}
+
+        .button84 {background-color: #04AA6D;top:448px;left: 820px;}
+        .button85 {background-color: #04AA6D;top:418px;left: 770px;}
+
+        .button86 {background-color: #04AA6D;top:448px;left: 770px;}
+        .button87 {background-color: #04AA6D;top:418px;left: 737px;}
+
+        .button88 {background-color: #04AA6D;top:448px;left: 737px;}
+        .button89 {background-color: #04AA6D;top:418px;left: 690px;}
+
+        .button90 {background-color: #04AA6D;top:448px;left: 690px;}
+        .button91 {background-color: #04AA6D;top:418px;left: 657px;}
+
+        .button92 {background-color: #04AA6D;top:448px;left: 657px;}
+        .button93 {background-color: #04AA6D;top:343px;left: 609px;}
+
+
+        .button94 {background-color: #04AA6D;top:374px;left: 609px;}
+        .button95 {background-color: #04AA6D;top:343px;left: 578px;}
+
+        .button96 {background-color: #04AA6D;top:374px;left: 578px;}
+        .button97 {background-color: #04AA6D;top:418px;left: 609px;}
+
+        .button98 {background-color: #04AA6D;top:450px;left: 609px;}
+        .button99 {background-color: #04AA6D;top:418px;left: 578px;}
+
+        .button100 {background-color: #04AA6D;top:450px;left: 578px;}
+        .button101 {background-color: #04AA6D;top:418px;left: 526px;}
+
+        .button102 {background-color: #04AA6D;top:448px;left: 526px;}
+        .button103 {background-color: #04AA6D;top:418px;left: 494px;}
+
+        .button104 {background-color: #04AA6D;top:448px;left: 494px;}
+        .button105 {background-color: #04AA6D;top:343px;left: 441px;}
+
+        .button106 {background-color: #04AA6D;top:373px;left: 441px;}
+        .button107 {background-color: #04AA6D;top:343px;left: 411px;}
+
+        .button108 {background-color: #04AA6D;top:376px;left: 411px;}
+        .button109 {background-color: #04AA6D;top:419px;left: 442px;}
+
+        .button110 {background-color: #04AA6D;top:449px;left: 442px;}
+        .button111 {background-color: #04AA6D;top:418px;left: 411px;}
+
+        .button112 {background-color: #04AA6D;top:449px;left: 411px;}
+        .button113 {background-color: #04AA6D;top:344px;left: 359px;}
+
+        .button114 {background-color: #04AA6D;top:375px;left: 359px;}
+        .button115 {background-color: #04AA6D;top:343px;left: 329px;}
+
+        .button116 {background-color: #04AA6D;top:375px;left: 329px;}
+        .button117 {background-color: #04AA6D;top:418px;left: 359px;}
+
+        .button118 {background-color: #04AA6D;top:448px;left: 359px;}
+        .button119 {background-color: #04AA6D;top:1291px;left: 1036px;}
+
+        .button119 {background-color: #04AA6D;top:418px;left: 329px;}
+        .button120 {background-color: #04AA6D;top:448px;left: 329px;}
+
+        .button121 {background-color: #04AA6D;top:344px;left: 277px;}
+        .button122 {background-color: #04AA6D;top:374px;left: 277px;}
+
+        .button123 {background-color: #04AA6D;top:344px;left: 247px;}
+        .button124 {background-color: #04AA6D;top:374px;left: 247px;}
+
+        .button125 {background-color: #04AA6D;top:418px;left: 277px;}
+        .button126 {background-color: #04AA6D;top:448px;left: 277px;}
+
+        .button127 {background-color: #04AA6D;top:418px;left: 247px;}
+        .button128 {background-color: #04AA6D;top:448px;left: 247px;}
+
+        .button129 {background-color: #04AA6D;top:418px;left: 195px;}
+        .button130 {background-color: #04AA6D;top:448px;left: 195px;}
+
+        .button131 {background-color: #04AA6D;top:418px;left: 167px;}
+        .button132 {background-color: #04AA6D;top:448px;left: 167px;}
+
+        .button133 {background-color: #04AA6D;top:224px;left: 125px;}
+        .button134 {background-color: #04AA6D;top:257px;left: 125px;}
+
+        .button135 {background-color: #04AA6D;top:224px;left: 160px;}
+        .button136 {background-color: #04AA6D;top:257px;left: 160px;}
+
+        .button137 {background-color: #04AA6D;top:239px;left: 238px;}
+        .button138 {background-color: #04AA6D;top:317px;left: 111px;}
+
+        .button139 {background-color: #04AA6D;top:344px;left: 99px;}
+        .button140 {background-color: #04AA6D;top:331px;left: 139px;}
+        .button141 {background-color: #04AA6D;top:357px;left: 125px;}
 
         .container{
     position: relative;
@@ -139,74 +261,82 @@
       <div class="container">
         <img src="static/assets/img/harta_buna.jpeg" alt="Harta" class="imagine">
         {% for seat in seats: %}
-        {% if seat.id in clear_seats: %}
+        {% if seat.id in clear_seats %}
+        {% if current_user.id not in users_who_reserved: %}
         <a class="button button{{ seat.id }}" href="{{ url_for('reservation', btn_id=seat.id) }}">{{ seat.id }}</a>
+        {% else %}
+        <a class="button button{{ seat.id }}" style="pointer-events: none">{{seat.id}}</a>
+        {% endif %}
         {% else %}
         <a class="button button{{ seat.id }}" style="background-color: red; pointer-events: none">{{seat.id}}</a>
         {% endif %}
         {% endfor %}
       </div>
       <div class="row gx-4 gx-lg-5 justify-content-center">
+        <span>AI Prediction: {{ rez }}% chance of being occupied.</span>
         <div class="my-5">
-          <form
-            id="contactForm"
-            name="sentMessage"
-            action="{{ url_for('book') }}"
-            method="post"
-          >
-            <div class="form-floating">
-              <input
-                class="form-control"
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Enter your name..."
-                required
-              />
-              <label for="name">Name</label>
-            </div>
-            <div class="form-floating">
-              <input
-                class="form-control"
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Enter your email..."
-                required
-              />
-              <label for="email">Email address</label>
-            </div>
-            <div class="form-floating">
-              <input
-                class="form-control"
-                id="phone"
-                name="phone"
-                type="tel"
-                placeholder="Enter your phone number..."
-                required
-              />
-              <label for="phone">Phone Number</label>
-            </div>
-            <div class="form-floating">
-              <textarea
-                class="form-control"
-                id="message"
-                name="message"
-                placeholder="Enter your message here..."
-                required
-                style="height: 12rem"
-              ></textarea>
-              <label for="message">Message</label>
-            </div>
-            <br />
-            <button
-              class="btn btn-danger text-uppercase"
-              id="submitButton"
-              type="submit"
-            >
-              SUBMIT
-            </button>
-          </form>
+          {{ render_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+
+        </div>
+<!--          <form-->
+<!--            id="contactForm"-->
+<!--            name="sentMessage"-->
+<!--            action="{{ url_for('book') }}"-->
+<!--            method="post"-->
+<!--          >-->
+<!--            <div class="form-floating">-->
+<!--              <input-->
+<!--                class="form-control"-->
+<!--                id="name"-->
+<!--                name="name"-->
+<!--                type="text"-->
+<!--                placeholder="Enter your name..."-->
+<!--                required-->
+<!--              />-->
+<!--              <label for="name">Name</label>-->
+<!--            </div>-->
+<!--            <div class="form-floating">-->
+<!--              <input-->
+<!--                class="form-control"-->
+<!--                id="email"-->
+<!--                name="email"-->
+<!--                type="email"-->
+<!--                placeholder="Enter your email..."-->
+<!--                required-->
+<!--              />-->
+<!--              <label for="email">Email address</label>-->
+<!--            </div>-->
+<!--            <div class="form-floating">-->
+<!--              <input-->
+<!--                class="form-control"-->
+<!--                id="phone"-->
+<!--                name="phone"-->
+<!--                type="tel"-->
+<!--                placeholder="Enter your phone number..."-->
+<!--                required-->
+<!--              />-->
+<!--              <label for="phone">Phone Number</label>-->
+<!--            </div>-->
+<!--            <div class="form-floating">-->
+<!--              <textarea-->
+<!--                class="form-control"-->
+<!--                id="message"-->
+<!--                name="message"-->
+<!--                placeholder="Enter your message here..."-->
+<!--                required-->
+<!--                style="height: 12rem"-->
+<!--              ></textarea>-->
+<!--              <label for="message">Message</label>-->
+<!--            </div>-->
+<!--            <br />-->
+<!--            <button-->
+<!--              class="btn btn-danger text-uppercase"-->
+<!--              id="submitButton"-->
+<!--              type="submit"-->
+<!--            >-->
+<!--              SUBMIT-->
+<!--            </button>-->
+<!--          </form>-->
         </div>
       </div>
       </div>
