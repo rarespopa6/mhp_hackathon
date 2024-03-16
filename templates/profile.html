@@ -2,7 +2,7 @@
 {% include "header.html" %}
 <header
   class="masthead"
-  style="background-image: url('../static/assets/img/quote2.jpg')"
+  style="background-image: url('../static/assets/img/prf-pic2.jpg')"
 >
 </header>
   <div class="container position-relative px-4 px-lg-5">
@@ -18,8 +18,12 @@
       <div class="col-md-10 col-lg-8 col-xl-7">
           <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <a class="btn btn-primary btn-lg" style="margin-left: 90px; margin-right: 50px; margin-bottom: 50px; margin-top: 50px" href="{{ url_for('get_all_posts') }}">Return Home</a>
+        {% if res: %}
         <a class="btn btn-danger btn-lg" style="margin-left: 90px; margin-bottom: 50px; margin-top: 50px" href="{{ url_for('cancel_res') }}">Cancel reservation</a>
-      </div>
+              {% else %}
+              <a class="btn btn-success btn-lg" style="margin-left: 90px; margin-bottom: 50px; margin-top: 50px" href="{{ url_for('book') }}">Get reservation</a>
+        {% endif %}
+          </div>
     </div>
   </div>
   </div>
