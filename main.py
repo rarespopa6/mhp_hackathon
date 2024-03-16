@@ -11,7 +11,7 @@ from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.orm import relationship
 # Import your forms from the forms.py
-from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
+from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm, BookForm
 
 '''
 Make sure the required packages are installed: 
@@ -51,9 +51,11 @@ gravatar = Gravatar(app,
                     use_ssl=False,
                     base_url=None)
 
-# CREATE DATABASE
+
 class Base(DeclarativeBase):
     pass
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
@@ -102,6 +104,14 @@ class Comment(db.Model):
     # Child Relationship to the BlogPosts
     post_id: Mapped[str] = mapped_column(Integer, db.ForeignKey("blog_posts.id"))
     parent_post = relationship("BlogPost", back_populates="comments")
+
+
+class Seats(db.Model):
+    __tablename__ = "reservations"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    nr: Mapped[int] = mapped_column(Integer, nullable=False)
+    booked: Mapped[int] = mapped_column(Integer, nullable=True)
+    author_id: Mapped[int] = mapped_column(Integer, db.ForeignKey("users.id"))
 
 
 with app.app_context():
@@ -265,13 +275,34 @@ def delete_post(post_id):
 
 
 @app.route("/about")
+@admin_only
 def about():
-    return render_template("about.html", current_user=current_user)
+    return render_template("reservation.html", current_user=current_user)
 
 
-@app.route("/contact")
-def contact():
-    return render_template("contact.html", current_user=current_user)
+@app.route("/book", methods=["GET", "POST"])
+def book():
+    result = db.session.execute(db.select(Seats))
+    seats = result.scalars().all()
+    clear_seats = [seat.id for seat in seats if not seat.booked]
+    return render_template("confirmation.html", current_user=current_user, clear_seats=clear_seats, seats=seats)
+
+
+@app.route("/book/<int:btn_id>", methods=["GET", "POST"])
+def reservation(btn_id):
+    form = BookForm()
+    if form.validate_on_submit():
+        seat = db.get_or_404(Seats, btn_id)
+        seat.booked = 1
+        seat.author_id = current_user.id
+        db.session.commit()
+        return redirect(url_for('get_all_posts'))
+    return render_template("reservation.html", current_user=current_user, btn_id=btn_id, form=form)
+
+
+@app.route("/succes")
+def succes_res():
+    return render_template("succes_reservation.html")
 
 
 if __name__ == "__main__":

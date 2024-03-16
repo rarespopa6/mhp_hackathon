@@ -1,0 +1,217 @@
+{% include "header.html" %}
+
+<!-- Page Header-->
+<header
+  class="masthead"
+  style="background-image: url('../static/assets/img/contact-bg.jpg')"
+>
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="page-heading">
+          <span class="subheading">Start booking right now.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <p>
+          Want to book a table or a room?
+        </p>
+        <p>
+          Check the availability and fill out the form below.
+        </p>
+<!--        -->
+      </div>
+<!--     <style>-->
+<!--      .button-container {-->
+<!--        display: flex;-->
+<!--        flex-wrap: wrap;-->
+<!--        justify-content: center;-->
+<!--      }-->
+<!--      .button-container > div {-->
+<!--        display: flex;-->
+<!--        flex-direction: column;-->
+<!--        align-items: center;-->
+<!--        margin: 0 10px;-->
+<!--      }-->
+<!--      .btn {-->
+<!--        margin: 5px;-->
+<!--      }-->
+<!--      -->
+<!--    </style>-->
+<!--      <div class="button-container">-->
+<!--        <div class="button-vertical">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=1) }}" style="border-radius: 50%; margin-bottom: 0px">1</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=2) }}" style="border-radius: 50%; margin-bottom: 0px">2</a>-->
+<!--        </div>-->
+<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=3) }}" style="border-radius: 50%; margin-bottom: 0px">3</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=4) }}" style="border-radius: 50%; margin-bottom: 0px">4</a>-->
+<!--        </div>-->
+<!--        <div class="button-vertical">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=5) }}" style="border-radius: 50%; margin-bottom: 0px">5</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=6) }}" style="border-radius: 50%; margin-bottom: 0px">6</a>-->
+<!--        </div>-->
+<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=7) }}" style="border-radius: 50%; margin-bottom: 0px">7</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=8) }}" style="border-radius: 50%; margin-bottom: 0px">8</a>-->
+<!--        </div>-->
+<!--        <div class="button-vertical">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=9) }}" style="border-radius: 50%; margin-bottom: 0px">9</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=10) }}" style="border-radius: 50%; margin-bottom: 0px">10</a>-->
+<!--        </div>-->
+<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=11) }}" style="border-radius: 50%; margin-bottom: 0px">11</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=12) }}" style="border-radius: 50%; margin-bottom: 0px">12</a>-->
+<!--        </div>-->
+<!--        <div class="button-vertical">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=13) }}" style="border-radius: 50%; margin-bottom: 0px">13</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=14) }}" style="border-radius: 50%; margin-bottom: 0px">14</a>-->
+<!--        </div>-->
+<!--        <div class="button-vertical" style="margin-left: 0px; margin-right: 50px">-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=15) }}" style="border-radius: 50%; margin-bottom: 0px">15</a>-->
+<!--          <a class="btn btn-success" href="{{ url_for('reservation', btn_id=16) }}" style="border-radius: 50%; margin-bottom: 0px">16</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--        -->
+      <style>
+        .button {
+          position:absolute;
+
+          width: 25px;
+          height: 25px;
+          border-radius: 100%;
+          border: none;
+          color: white;
+          /* padding: 15px 32px; */
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+        }
+
+        .button1 {background-color: #04AA6D;top:131px;left: 130px;} /* Green */
+        .button2 {background-color: #04AA6D;top:103px;left: 130px;}
+        .button3 {background-color: #04AA6D;top:103px;left: 159px;}
+        .button4 {background-color: #04AA6D;top:131px;left: 159px;}
+        .button5 {background-color: #04AA6D;top:103px;left: 206px;}
+        .button6 {background-color: #04AA6D;top:131px;left: 206px;}
+        .button7 {background-color: #04AA6D;top:103px;left: 235px;}
+        .button8 {background-color: #04AA6D;top:131px;left: 235px;}
+        .button9 {background-color: #04AA6D;top:103px;left: 279px;}
+        .button10 {background-color: #04AA6D;top:131px;left: 279px;}
+        .button11 {background-color: #04AA6D;top:103px;left: 306px;}
+        .button12 {background-color: #04AA6D;top:131px;left: 306px;}
+        .button13 {background-color: #04AA6D;top:103px;left: 341px;}
+        .button14 {background-color: #04AA6D;top:131px;left: 341px;}
+        .button15 {background-color: #04AA6D;top:103px;left: 370px;}
+        .button16 {background-color: #04AA6D;top:131px;left: 370px;}
+
+        .container{
+    position: relative;
+    display: inline-block;
+}
+.buton{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.imagine {
+    width: 100%; /* Asigură că imaginea ocupă întreaga lățime a containerului */
+    height: auto; /* Menține raportul de aspect al imaginii */
+  }
+   </style>
+      <div class="container">
+        <img src="static/assets/img/harta_buna.jpeg" alt="Harta" class="imagine">
+        {% for seat in seats: %}
+        {% if seat.id in clear_seats: %}
+        <a class="button button{{ seat.id }}" href="{{ url_for('reservation', btn_id=seat.id) }}">{{ seat.id }}</a>
+        {% else %}
+        <a class="button button{{ seat.id }}" style="background-color: red; pointer-events: none">{{seat.id}}</a>
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="my-5">
+          <form
+            id="contactForm"
+            name="sentMessage"
+            action="{{ url_for('book') }}"
+            method="post"
+          >
+            <div class="form-floating">
+              <input
+                class="form-control"
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Enter your name..."
+                required
+              />
+              <label for="name">Name</label>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control"
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email..."
+                required
+              />
+              <label for="email">Email address</label>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control"
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Enter your phone number..."
+                required
+              />
+              <label for="phone">Phone Number</label>
+            </div>
+            <div class="form-floating">
+              <textarea
+                class="form-control"
+                id="message"
+                name="message"
+                placeholder="Enter your message here..."
+                required
+                style="height: 12rem"
+              ></textarea>
+              <label for="message">Message</label>
+            </div>
+            <br />
+            <button
+              class="btn btn-danger text-uppercase"
+              id="submitButton"
+              type="submit"
+            >
+              SUBMIT
+            </button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% include "footer.html" %}
